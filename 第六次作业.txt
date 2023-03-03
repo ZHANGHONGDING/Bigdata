@@ -1,0 +1,115 @@
+import matplotlib
+from matplotlib import pyplot as plt
+from datascience import *
+import numpy as np
+scores=[]
+# plt.figure(figsize=(20,10),dpi=80)
+for i in range(5,11):
+    if(i==9):
+        score=Table.read_table('20211109-1-utf-8.csv')
+        score1=Table.read_table('20211109-utf-8.csv')
+        scores.append(score)
+        scores.append(score1)
+    elif(i!=10):
+        score = Table.read_table('2021110' + str(i) + '-utf-8.csv')
+        scores.append(score)
+    else:
+        score = Table.read_table('20211110-utf-8.csv')
+        scores.append(score)
+chiness=[]
+mathes=[]
+englishs=[]
+physicss=[]
+chemistrys=[]
+creatures=[]
+li=[]
+alls=[]
+for i in range(64):
+    chiness.append(sum(chines[i*7:(i+1)*7]))
+    mathes.append(sum(math[i*7:(i+1)*7]))
+    englishs.append(sum(english[i*7:(i+1)*7]))
+    physicss.append(sum(physics[i*7:(i+1)*7]))
+    chemistrys.append(sum(chemistry[i*7:(i+1)*7]))
+    creatures.append(sum(creature[i*7:(i+1)*7]))
+    li.append(sum(li_all[i*7:(i+1)*7]))
+    alls.append(sum(allscore[i*7:(i+1)*7]))
+    
+result=Table().with_columns('姓名',name,'语文',chiness,'数学',mathes,'英语',englishs,'物理',physicss,'化学',chemistrys,'生物',creatures,'理综',li,'总分',alls)
+result
+姓名	语文	数学	英语	物理	化学	生物	理综	总分
+杨靖鑫	760	657	682	369	396	433	1198	3295
+王绍玮	765	595	708	316	375	366	1057	3123
+潘虓虓	745	610	644	300	396	375	1071	3068
+陈颖	732	562	660	272	383	368	1023	2977
+胥敏捷	753	594	645	320	383	361	1064	3055
+赵丹	751	588	661	321	362	396	1079	3079
+李欣洁	764	571	597	268	321	339	928	2858
+张然	757	544	614	225	282	339	846	2761
+朱锦	724	441	520	214	314	314	842	2524
+周靖珊	749	636	730	345	371	404	1120	3234
+... (54 rows omitted)
+
+chines_head=result.select('姓名','语文').sort("语文",descending="True")
+math_head=result.select('姓名','数学').sort("数学",descending="True")
+english_head=result.select('姓名','英语').sort("英语",descending="True")
+physics_head=result.select('姓名','物理').sort("物理",descending="True")
+chemistry_head=result.select('姓名','化学').sort("化学",descending="True")
+creature_head=result.select('姓名','生物').sort("生物",descending="True")
+li_head=result.select('姓名','理综').sort("理综",descending="True")
+all_head=result.select('姓名','总分').sort("总分",descending="True")
+chines_head.take(np.arange(5))
+姓名	语文
+唐雯婕	743
+何柃逸	743
+孙思	719
+刘欢	716
+唐杰	715
+math_head.take(np.arange(5))
+姓名	数学
+王凤仪	736
+杨靖鑫	661
+陈文慧	643
+赵丹	625
+胥敏捷	611
+english_head.take(np.arange(5))
+姓名	英语
+唐杰	729
+张然	728
+潘虓虓	710
+黄思哲	693
+李欣洁	685
+physics_head.take(np.arange(5))
+姓名	物理
+杨靖鑫	491
+刘翔	486
+王绍玮	464
+潘虓虓	452
+王宣	450
+chemistry_head.take(np.arange(5))
+姓名	化学
+刘翔	519
+王玮博	479
+杨靖鑫	476
+王宣	457
+朱锦	456
+creature_head.take(np.arange(5))
+姓名	生物
+杨靖鑫	476
+王绍玮	466
+胥敏捷	460
+何柃逸	455
+王凤仪	447
+li_head.take(np.arange(5))
+姓名	理综
+刘翔	1445
+杨靖鑫	1443
+王绍玮	1371
+王宣	1330
+潘虓虓	1305
+all_head.take(np.arange(5))
+姓名	总分
+王凤仪	3374
+杨靖鑫	3352
+潘虓虓	3284
+刘翔	3274
+王绍玮	3238
